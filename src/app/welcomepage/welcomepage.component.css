@@ -1,0 +1,5 @@
+#welcomeImage {
+    background-image: url("/../assets/welcomePage.png");
+    background-repeat: no-repeat;
+    height: 800px;
+}
