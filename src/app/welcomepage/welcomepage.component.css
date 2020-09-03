@@ -2,4 +2,16 @@
     background-image: url("/../assets/welcomePage.png");
     background-repeat: no-repeat;
     height: 800px;
+    outline: 1px solid red;
+    max-width: 600px;
+}
+
+#userManage {
+    /* width: 30%; */
+    outline: 1px solid green;
+    min-width: 380px;
+}
+
+.col, .col-8, .col-4 {
+    outline: 1px solid pink;
 }
