@@ -11,9 +11,9 @@ export class UserService {
   readonly BaseURI = 'https://localhost:5001/api';
 
   formModel = this.fb.group({
-    UserName: ['', Validators.required],
+    FirstName: ['', Validators.required],
+    LastName: ['', Validators.required],
     Email: ['', Validators.email],
-    FullName: [''],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]
@@ -35,39 +35,11 @@ export class UserService {
 
   register() {
     var body = {
-      UserName: this.formModel.value.UserName,
+      FirstName: this.formModel.value.FirstName,
+      LastName: this.formModel.value.LastName,
       Email: this.formModel.value.Email,
-      FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password
     };
     return this.http.post(this.BaseURI + '/User/Register', body);
-  }
-
-  login(formData) {
-    return this.http.post(this.BaseURI + '/User/Login', formData);
-  }
-
-  getUserProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
-  }
-
-  getToDoItems() {
-    return this.http.get(this.BaseURI + '/todoitem');
-  }
-
-  getToDoItem(toDoItemId) {
-    return this.http.get(this.BaseURI + '/todoitem/' + toDoItemId);
-  }
-
-  postToDoItem(toDoItem) {
-    return this.http.post(this.BaseURI + '/todoitem', toDoItem);
-  }
-
-  putToDoItem(toDoItemId, toDoItem) {
-    return this.http.put(this.BaseURI + '/todoitem?id=' + toDoItemId, toDoItem);
-  }
-
-  deleteToDoItem(toDoItemId){
-    return this.http.delete(this.BaseURI + '/todoitem?id=' + toDoItemId);
   }
 }

@@ -1,12 +1,19 @@
-<div class="example-container">    
+<div class="example-container">   
+  <form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
     <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
-        <input matInput>
+        <input class="form-conrol" matInput #Email="ngModel" name="Email" [(ngModel)]="formModel.Email" required>
       </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
         <mat-label>Password</mat-label>
-        <input matInput>
+        <input type="password" class="form-conrol" matInput #Email="ngModel" name="Password" [(ngModel)]="formModel.Password" required>
       </mat-form-field>
     <br>
+    <div class="form-row">
+      <div class="form-group col-md-8 offset-md-2">
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+      </div>
+    </div>
+  </form> 
 </div>

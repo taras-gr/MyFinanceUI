@@ -9,7 +9,7 @@
 #userManage {
     /* width: 30%; */
     outline: 1px solid green;
-    min-width: 380px;
+    /* min-width: 380px; */
 }
 
 .col, .col-8, .col-4 {
