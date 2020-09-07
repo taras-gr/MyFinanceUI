@@ -54,4 +54,8 @@ export class UserService {
     };
     return this.http.post(this.BaseURI + '/User/Login', body);
   }
+
+  userProfile() {
+    return this.http.get(this.BaseURI + '/UserProfile');
+  }
 }

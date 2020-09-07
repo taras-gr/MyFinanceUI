@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
     Password : ''  
   }
 
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         localStorage.setItem('token', res.token);
         console.log(res.token);
+        this.router.navigateByUrl('/userpage');
         //this.router.navigateByUrl('/home');
       },
       err => {
