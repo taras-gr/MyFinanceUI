@@ -10,7 +10,7 @@ export class UserService {
   constructor(private fb: FormBuilder, private http: HttpClient) { }
   readonly BaseURI = 'https://localhost:5001/api';
 
-  formModel = this.fb.group({
+  userForRegistrationModel = this.fb.group({
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
     Email: ['', Validators.email],
@@ -18,7 +18,11 @@ export class UserService {
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]
     }, { validator: this.comparePasswords })
+  });
 
+  userForLoginModel = this.fb.group({    
+    Email: ['', Validators.email],
+    Password: ['', Validators.email]
   });
 
   comparePasswords(fb: FormGroup) {
@@ -35,11 +39,19 @@ export class UserService {
 
   register() {
     var body = {
-      FirstName: this.formModel.value.FirstName,
-      LastName: this.formModel.value.LastName,
-      Email: this.formModel.value.Email,
-      Password: this.formModel.value.Passwords.Password
+      FirstName: this.userForRegistrationModel.value.FirstName,
+      LastName: this.userForRegistrationModel.value.LastName,
+      Email: this.userForRegistrationModel.value.Email,
+      Password: this.userForRegistrationModel.value.Passwords.Password
     };
     return this.http.post(this.BaseURI + '/User/Register', body);
+  }
+
+  login() {
+    var body = {
+      Email: this.userForLoginModel.value.Email,
+      Password: this.userForLoginModel.value.Password
+    };
+    return this.http.post(this.BaseURI + '/User/Login', body);
   }
 }

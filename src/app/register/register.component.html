@@ -1,9 +1,9 @@
 <div class="example-container">
-  <form [formGroup]="service.formModel" autocomplete="off" (submit)="onSubmit()">
+  <form [formGroup]="service.userForRegistrationModel" autocomplete="off" (submit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label>First name</mat-label>
       <input matInput formControlName="FirstName" required>
-      <label class="text-danger" *ngIf="service.formModel.get('FirstName').touched && service.formModel.get('FirstName').errors?.required">This field is mandatory</label>
+      <label class="text-danger" *ngIf="service.userForRegistrationModel.get('FirstName').touched && service.userForRegistrationModel.get('FirstName').errors?.required">This field is mandatory</label>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">

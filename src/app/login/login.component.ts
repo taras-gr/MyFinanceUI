@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,25 @@ export class LoginComponent implements OnInit {
     Password : ''  
   }
 
-  constructor() { }
+  constructor(public service: UserService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form:NgForm) {
-    
+  onSubmit() {
+    this.service.login().subscribe(
+      (res: any) => {
+        localStorage.setItem('token', res.token);
+        console.log(res.token);
+        //this.router.navigateByUrl('/home');
+      },
+      err => {
+        // if (err.status == 400)
+        //   //this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+        // else
+        //   console.log(err);
+      }
+    );
   }
 
 }
