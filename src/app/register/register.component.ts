@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent implements OnInit {
     Password : ''
   }
 
-  constructor(public service: UserService) { }
+  constructor(public service: UserService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
       (res: any) => {
         localStorage.setItem('token', res.token);
         console.log(res.token);
-        //this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/userpage');
       },
       err => {
         // if (err.status == 400)

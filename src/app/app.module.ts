@@ -17,13 +17,15 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserPageComponent } from './user-page/user-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomepageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,
