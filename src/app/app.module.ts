@@ -13,12 +13,15 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import { RegisterComponent } from './register/register.component';
 import {MatButtonModule} from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table'  
+import {CdkTableModule} from '@angular/cdk/table';
 import { UserService } from './shared/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { UserPageComponent } from './user-page/user-page.component';
     WelcomepageComponent,
     LoginComponent,
     RegisterComponent,
-    UserPageComponent
+    UserPageComponent,
+    ExpensesComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { UserPageComponent } from './user-page/user-page.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatListModule
+    MatListModule,
+    CdkTableModule,
+    MatTableModule
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [UserService, {

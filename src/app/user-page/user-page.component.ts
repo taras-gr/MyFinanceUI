@@ -12,6 +12,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(public userService: UserService, public router: Router) { }
   formModel = {
+    UserName: '',
     FirstName : '',
     LastName : '',
     Email : ''
@@ -20,6 +21,7 @@ export class UserPageComponent implements OnInit {
     this.userService.userProfile().subscribe(
       (res: any) => {
         console.log(res);
+        this.formModel.UserName = res.userName,
         this.formModel.FirstName = res.firstName;
         this.formModel.LastName = res.lastName;
         this.formModel.Email = res.email;

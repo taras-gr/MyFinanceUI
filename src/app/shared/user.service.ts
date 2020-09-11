@@ -58,4 +58,8 @@ export class UserService {
   userProfile() {
     return this.http.get(this.BaseURI + '/UserProfile');
   }
+
+  getUserExpenses(userName: string) {
+    return this.http.get(this.BaseURI + '/users/' + userName + '/expenses');
+  }
 }
