@@ -25,6 +25,8 @@ export class UserPageComponent implements OnInit {
         this.formModel.FirstName = res.firstName;
         this.formModel.LastName = res.lastName;
         this.formModel.Email = res.email;
+        
+        localStorage.setItem('userName', res.userName);
       },
       err => {
         // if (err.status == 400)

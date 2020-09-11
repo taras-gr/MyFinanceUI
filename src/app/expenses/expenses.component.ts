@@ -19,7 +19,8 @@ export class ExpensesComponent implements OnInit {
   constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.getUserExpenses('ostap2000').subscribe(
+    const userName = localStorage.getItem('userName');
+    this.userService.getUserExpenses(userName).subscribe(
       (res: any) => {
         console.log(res);
         this.dataSource = res;
