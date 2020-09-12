@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from '../shared/user.service';
 
 export class PeriodicElement {
@@ -14,7 +15,9 @@ export class PeriodicElement {
 })
 export class ExpensesComponent implements OnInit {
   displayedColumns: string[] = ['title', 'expenseDate', 'category'];
-  dataSource: PeriodicElement[];
+  
+  dsElements: MatTableDataSource<PeriodicElement>;
+  dataFromApi;
   value;
   foods: Food[] = [
     {value: 'Gadgets', viewValue: 'Gadgets'},
@@ -22,14 +25,17 @@ export class ExpensesComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Tacos'}
   ];
   
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService) {
+    this.dsElements = new MatTableDataSource<PeriodicElement>();
+  }
 
   ngOnInit(): void {
     const userName = localStorage.getItem('userName');
     this.userService.getUserExpenses(userName).subscribe(
       (res: any) => {
         console.log(res);
-        this.dataSource = res;
+        this.dataFromApi = res;
+        this.dsElements.data = this.dataFromApi;
       },
       err => {
         // if (err.status == 400)
@@ -43,9 +49,10 @@ export class ExpensesComponent implements OnInit {
   addNewExpense() {
     const userName = localStorage.getItem('userName');
     this.userService.postNewExpense(userName).subscribe(
-      (res: any) => {
-        this.dataSource.join(res);
+      (res: any) => {        
         console.log(res);
+        this.dataFromApi.push(res);
+        this.dsElements.data = this.dataFromApi;
         //this.router.navigateByUrl('/userpage');
         //this.router.navigateByUrl('/home');
       },
