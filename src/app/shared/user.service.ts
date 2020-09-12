@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,12 @@ export class UserService {
   userForLoginModel = this.fb.group({    
     Email: ['', Validators.email],
     Password: ['', Validators.email]
+  });
+
+  expenseToAddModel = this.fb.group({
+    Title: ['', Validators.required],
+    ExpenseDate: ['', Validators.required],
+    Category: ['', Validators.required]
   });
 
   comparePasswords(fb: FormGroup) {
@@ -61,5 +68,18 @@ export class UserService {
 
   getUserExpenses(userName: string) {
     return this.http.get(this.BaseURI + '/users/' + userName + '/expenses');
+  }
+
+  getUserCategories(userName: string) {
+    return this.http.get(this.BaseURI + '/users/' + userName + '/categories');
+  }
+
+  postNewExpense(userName: string) {
+    var body = {
+      Title: this.expenseToAddModel.value.Title,
+      ExpenseDate: this.expenseToAddModel.value.ExpenseDate,
+      Category: this.expenseToAddModel.value.Category
+    };
+    return this.http.post(this.BaseURI + '/users/' + userName + '/expenses', body);
   }
 }
