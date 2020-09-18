@@ -50,7 +50,7 @@ export class ExpensesComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          var results : Observable<HttpResponse<GetExpensesResult>>;
+          var results : Observable<HttpResponse<Expense[]>>;
           results = this.userService
             .getUserExpenses(userName, this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
             results.subscribe((res: any) => {
@@ -64,7 +64,7 @@ export class ExpensesComponent implements AfterViewInit {
         }),
         map(data => {
           this.isLoadingResults = false;
-          return data.body.value;
+          return data.body;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -105,9 +105,9 @@ interface Food {
   viewValue: string;
 }
 
-export interface GetExpensesResult {
-  value: Expense[];
-}
+// export interface GetExpensesResult {
+//   value: Expense[];
+// }
 
 export interface GetExpensesResultPaginationHeader {
   totalCount: number;

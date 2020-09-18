@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { ThrowStmt } from '@angular/compiler';
-import { GetExpensesResult } from '../expenses/expenses.component';
 import { Observable } from 'rxjs';
+import { Expense } from '../expenses/expenses.component';
 
 @Injectable({
   providedIn: 'root'
@@ -68,13 +68,13 @@ export class UserService {
     return this.http.get(this.BaseURI + '/UserProfile');
   }
 
-  getUserExpenses(userName: string, sort: string, order: string, page: number, pageSize: number): Observable<HttpResponse<GetExpensesResult>>{
+  getUserExpenses(userName: string, sort: string, order: string, page: number, pageSize: number): Observable<HttpResponse<Expense[]>>{
     const href = `https://localhost:5001/api/users/${userName}/expenses`;
     const requestUrl =
         `${href}?pageNumber=${page + 1}&pageSize=${pageSize}&orderBy=${sort}_${order}`;
 
         console.log(requestUrl);
-    return this.http.get<GetExpensesResult>(
+    return this.http.get<Expense[]>(
       requestUrl, {observe: 'response'});
   }
 
