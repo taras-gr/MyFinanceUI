@@ -7,12 +7,10 @@ import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../shared/user.service';
 import { CreatedSnackBarComponent } from './created-snack-bar/created-snack-bar.component';
-
-export class PeriodicElement {
-  title: string;
-  expenseDate: number;
-  category: number;
-}
+import { Expense } from '../models/expense';
+import { Category } from '../models/category'
+import { GetExpensesResultPaginationHeader } from '../models/getExpensesResultPaginationHeader';
+import { CategoryService } from '../shared/category.service';
 
 @Component({
   selector: 'app-expenses',
@@ -31,17 +29,20 @@ export class ExpensesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   value;
-  foods: Food[] = [
-    {value: 'Gadgets', viewValue: 'Gadgets'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  categories: Category[];
   
-  constructor(private _snackBar: MatSnackBar, public userService: UserService) { }
+  constructor(
+    private snackBar: MatSnackBar, 
+    private categoryService: CategoryService, 
+    public userService: UserService) { }
 
   ngAfterViewInit(): void {
-    const userName = localStorage.getItem('userName');
-    
+    const userName = localStorage.getItem('userName');    
+    this.categoryService.getUserCategories(userName)
+      .subscribe(
+        (data: Category[]) => this.categories = data,
+        (err: any) => console.log(err)
+      );
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -56,10 +57,8 @@ export class ExpensesComponent implements AfterViewInit {
             results.subscribe((res: any) => {
               let paginationHeaderValue: GetExpensesResultPaginationHeader;
               paginationHeaderValue = JSON.parse(res.headers.get('X-Pagination'));
-              console.log(res.headers.get('X-Pagination'));
               this.resultsLength = paginationHeaderValue.totalCount;
             });          
-          
           return results;
         }),
         map(data => {
@@ -76,12 +75,9 @@ export class ExpensesComponent implements AfterViewInit {
   addNewExpense() {
     const userName = localStorage.getItem('userName');
     this.userService.postNewExpense(userName).subscribe(
-      (res: any) => {        
-        this.data.pop();
-        this.data.push(res);
-        console.log(res);
+      () => {
         this.ngAfterViewInit();
-        this._snackBar.openFromComponent(CreatedSnackBarComponent, {
+        this.snackBar.openFromComponent(CreatedSnackBarComponent, {
           duration: this.durationInSeconds * 1000,
         });
       },
@@ -93,33 +89,4 @@ export class ExpensesComponent implements AfterViewInit {
       }
     );
   }
-
-  openSnackBar() {
-    
-  }
-
-}
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
-// export interface GetExpensesResult {
-//   value: Expense[];
-// }
-
-export interface GetExpensesResultPaginationHeader {
-  totalCount: number;
-  PageSize: number;
-  CurrentPage: number;
-  TotalPages: number;
-}
-
-export interface Expense {
-  id: string;
-  title: string;
-  category: string;
-  expenseDate: Date;
-  cost: number;
 }

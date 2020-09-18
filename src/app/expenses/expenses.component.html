@@ -18,8 +18,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Favorite food</mat-label>
       <mat-select formControlName="Category">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let category of categories" [value]="categories.title">
+          {{category.title}}
         </mat-option>
       </mat-select>
     </mat-form-field>

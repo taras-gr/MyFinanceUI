@@ -7,22 +7,23 @@ import { WelcomepageComponent } from './welcomepage/welcomepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoginComponent } from './login/login.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatListModule} from '@angular/material/list'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list'
 import { MatSelectModule } from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { RegisterComponent } from './register/register.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule} from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table'  
-import {MatIconModule} from '@angular/material/icon';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { UserService } from './shared/user.service';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { CategoryService } from './shared/category.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -68,6 +69,10 @@ import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-s
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [UserService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }, CategoryService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
