@@ -16,15 +16,21 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table'  
 import {MatIconModule} from '@angular/material/icon';
 import {MatNativeDateModule} from '@angular/material/core';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { UserService } from './shared/user.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserPageComponent } from './user-page/user-page.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { MatSortModule } from '@angular/material/sort';
+import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,8 @@ import { CategoriesComponent } from './categories/categories.component';
     RegisterComponent,
     UserPageComponent,
     ExpensesComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CreatedSnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -51,8 +58,13 @@ import { CategoriesComponent } from './categories/categories.component';
     MatListModule,
     MatIconModule,
     MatTableModule,
+    MatSortModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [UserService, {
