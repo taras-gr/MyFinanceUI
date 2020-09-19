@@ -32,6 +32,7 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatSortModule } from '@angular/material/sort';
 import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-snack-bar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-s
     UserPageComponent,
     ExpensesComponent,
     CategoriesComponent,
-    CreatedSnackBarComponent
+    CreatedSnackBarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
