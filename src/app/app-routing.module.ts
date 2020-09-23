@@ -5,12 +5,14 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   {path: '', component:WelcomepageComponent},
   {path: 'userpage', component: UserPageComponent, canActivate:[AuthGuard]},
   {path: ':userName/expenses', component: ExpensesComponent, canActivate:[AuthGuard]},
-  {path: ':userName/categories', component: CategoriesComponent, canActivate:[AuthGuard]}
+  {path: ':userName/categories', component: CategoriesComponent, canActivate:[AuthGuard]},
+  {path: ':userName/statistics', component: StatisticsComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({
