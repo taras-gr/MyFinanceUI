@@ -19,7 +19,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Favorite food</mat-label>
       <mat-select formControlName="Category">
-        <mat-option *ngFor="let category of categories" [value]="categories.title">
+        <mat-option *ngFor="let category of categories" [value]="category.title">
           {{category.title}}
         </mat-option>
       </mat-select>
