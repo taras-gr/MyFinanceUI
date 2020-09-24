@@ -20,6 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { UserService } from './shared/user.service';
 import { CategoryService } from './shared/category.service';
+import { StatisticsService } from './shared/statistics.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -77,6 +78,10 @@ import { StatisticsComponent } from './statistics/statistics.component';
     useClass: AuthInterceptor,
     multi: true
   }, CategoryService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }, StatisticsService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
