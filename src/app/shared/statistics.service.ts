@@ -15,7 +15,7 @@ export class StatisticsService {
     EndDate: ['', Validators.required]
   });
 
-  getUserSatsByExpenseDate(userName: string) {
+  getUserSatsByProperty(userName: string, propertyForStats: string) {
     var dd = String(this.expenseDateRangeModel.value.StartDate.getDate()).padStart(2, '0');
     var mm = String(this.expenseDateRangeModel.value.StartDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = this.expenseDateRangeModel.value.StartDate.getFullYear();
@@ -28,6 +28,6 @@ export class StatisticsService {
     var end = yyyy1 + '-' + mm1 + '-' + dd1;
 
     return this.http.get(this.BaseURI + '/users/' + userName + '/stats' + 
-    '?startDate=' + start + '&endDate=' + end + '&statsByProperty=expenseDate');
+    '?startDate=' + start + '&endDate=' + end + '&statsByProperty=' + propertyForStats);
   }
 }

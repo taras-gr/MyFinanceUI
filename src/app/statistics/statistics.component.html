@@ -14,13 +14,13 @@
             <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
             <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary" (click)="getUserStatsByExpenseDate()">Submit</button>   
+          <button mat-raised-button color="primary" (click)="getStats()">Submit</button>   
       </form>     
     </div>
-    <div id="datesStats">
-        <canvas id="myChart" width="400" height="400"></canvas>
+    <div id="datesStats" class="charts">
+      <canvas id="barChart" width="400" height="400"></canvas>
     </div>
-    <div id="categorisStats">
-
+    <div id="categoriesStats" class="charts">
+      <canvas  id="pieChart" width="400" height="400"></canvas>
     </div>
 </div>
