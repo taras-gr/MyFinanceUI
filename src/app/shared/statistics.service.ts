@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { FormBuilder, Validators } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsService {
+  baseApiUri = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:5001/api';
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.baseApiUri = environment.baseApiUri;
+  } 
 
   expenseDateRangeModel = this.fb.group({
     StartDate: ['', Validators.required],
@@ -27,7 +30,7 @@ export class StatisticsService {
     var start = yyyy + '-' + mm + '-' + dd;
     var end = yyyy1 + '-' + mm1 + '-' + dd1;
 
-    return this.http.get(this.BaseURI + '/users/' + userName + '/stats' + 
+    return this.http.get(this.baseApiUri + '/users/' + userName + '/stats' + 
     '?startDate=' + start + '&endDate=' + end + '&statsByProperty=' + propertyForStats);
   }
 }

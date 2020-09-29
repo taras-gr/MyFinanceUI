@@ -3,17 +3,20 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-
-  constructor(private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:5001/api';
+  baseApiUri = '';
+  
+  constructor(private http: HttpClient) {
+    this.baseApiUri = environment.baseApiUri;
+  }
 
   getUserCategories(userName: string): Observable<Category[]> {
     console.log('getting categories');
-    return this.http.get<Category[]>(this.BaseURI + '/users/' + userName + '/categories');
+    return this.http.get<Category[]>(this.baseApiUri + '/users/' + userName + '/categories');
   }
 }

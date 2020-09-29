@@ -3,14 +3,17 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { Expense } from '../models/expense'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  baseApiUri = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'https://localhost:5001/api';
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.baseApiUri = environment.baseApiUri;  
+  }
 
   userForRegistrationModel = this.fb.group({
     FirstName: ['', Validators.required],
@@ -52,7 +55,7 @@ export class UserService {
       Email: this.userForRegistrationModel.value.Email,
       Password: this.userForRegistrationModel.value.Passwords.Password
     };
-    return this.http.post(this.BaseURI + '/User/Register', body);
+    return this.http.post(this.baseApiUri + '/User/Register', body);
   }
 
   login() {
@@ -60,15 +63,15 @@ export class UserService {
       Email: this.userForLoginModel.value.Email,
       Password: this.userForLoginModel.value.Password
     };
-    return this.http.post(this.BaseURI + '/User/Login', body);
+    return this.http.post(this.baseApiUri + '/User/Login', body);
   }
 
   userProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+    return this.http.get(this.baseApiUri + '/UserProfile');
   }
 
   getUserExpenses(userName: string, sort: string, order: string, page: number, pageSize: number): Observable<HttpResponse<Expense[]>>{
-    const href = `https://localhost:5001/api/users/${userName}/expenses`;
+    const href = `${this.baseApiUri}/users/${userName}/expenses`;
     const requestUrl =
         `${href}?pageNumber=${page + 1}&pageSize=${pageSize}&orderBy=${sort}_${order}`;
 
@@ -78,7 +81,7 @@ export class UserService {
   }
 
   getUserCategories(userName: string) {
-    return this.http.get(this.BaseURI + '/users/' + userName + '/categories');
+    return this.http.get(this.baseApiUri + '/users/' + userName + '/categories');
   }
 
   postNewExpense(userName: string) {
@@ -87,10 +90,10 @@ export class UserService {
       ExpenseDate: this.expenseToAddModel.value.ExpenseDate,
       Category: this.expenseToAddModel.value.Category
     };
-    return this.http.post(this.BaseURI + '/users/' + userName + '/expenses', body);
+    return this.http.post(this.baseApiUri + '/users/' + userName + '/expenses', body);
   }
 
   deleteUserExpense(userName: string, expenseId: string) {
-    return this.http.delete(this.BaseURI + '/users/' + userName + '/expenses/' + expenseId);
+    return this.http.delete(this.baseApiUri + '/users/' + userName + '/expenses/' + expenseId);
   }
 }
