@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import Chart from 'chart.js';
 import { StatisticsService } from '../shared/statistics.service';
 
@@ -8,12 +7,7 @@ import { StatisticsService } from '../shared/statistics.service';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent implements OnInit {
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
-  
+export class StatisticsComponent implements OnInit {  
   barChart;
   barChartDataSource;
   barChartLabels = [];
