@@ -18,7 +18,7 @@ import { CategoryService } from '../shared/category.service';
   styleUrls: ['./expenses.component.css']
 })
 export class ExpensesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['title', 'category', 'expenseDate', 'cost'];
+  displayedColumns: string[] = ['title', 'category', 'expenseDate', 'cost', 'actions'];
   data: Expense[] = [];
 
   resultsLength = 0;
@@ -80,6 +80,24 @@ export class ExpensesComponent implements AfterViewInit {
         this.snackBar.openFromComponent(CreatedSnackBarComponent, {
           duration: this.durationInSeconds * 1000,
         });
+      },
+      err => {
+        // if (err.status == 400)
+        //   //this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+        // else
+        //   console.log(err);
+      }
+    );
+  }
+
+  deleteExpense(expenseId: string) {
+    const userName = localStorage.getItem('userName');
+    this.userService.deleteUserExpense(userName, expenseId).subscribe(
+      () => {
+        this.ngAfterViewInit();
+        // this.snackBar.openFromComponent(CreatedSnackBarComponent, {
+        //   duration: this.durationInSeconds * 1000,
+        // });
       },
       err => {
         // if (err.status == 400)

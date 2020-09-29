@@ -89,4 +89,8 @@ export class UserService {
     };
     return this.http.post(this.BaseURI + '/users/' + userName + '/expenses', body);
   }
+
+  deleteUserExpense(userName: string, expenseId: string) {
+    return this.http.delete(this.BaseURI + '/users/' + userName + '/expenses/' + expenseId);
+  }
 }

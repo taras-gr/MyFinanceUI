@@ -3,8 +3,9 @@ table {
   }
 
 #inputNewExpense {
-  outline: 1px solid red;
+  outline: 0px solid red;
   position: relative;
+  margin: 20px 20px;
 }
 
 #wrapperForTextInput {
@@ -17,6 +18,7 @@ table {
 .example-container {
   position: relative;
   min-height: 200px;
+  margin: 0 20px;
 }
 
 .example-table-container {
