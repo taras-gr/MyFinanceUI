@@ -8,10 +8,12 @@ table {
   margin: 20px 20px;
 }
 
-#wrapperForTextInput {
-  display: inline;
-  position: relative;
-  top: 4px;
+#titleInput, #dateInput {
+  width: 200px;
+}
+
+mat-form-field {
+  margin-right: 10px;
 }
 
 /* Structure */
@@ -63,5 +65,4 @@ table {
 #addExpenseButton {
   position: relative;
   top: -6px;
-  margin-left: 10px
 }

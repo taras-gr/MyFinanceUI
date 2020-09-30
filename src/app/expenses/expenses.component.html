@@ -1,16 +1,14 @@
 <app-navbar></app-navbar>
 <div id="inputNewExpense">
   <form [formGroup]="userService.expenseToAddModel" >
-    <div id="wrapperForTextInput">
-    <mat-form-field class="example-form-field">
-      <mat-label>Expense title</mat-label>
+    <mat-form-field color="primary" appearance="fill" id="titleInput">
+      <mat-label>Title</mat-label>
       <input matInput type="text" [(ngModel)]="value" formControlName="Title">
       <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
         <mat-icon>clear</mat-icon>
       </button>
     </mat-form-field>
-  </div>
-    <mat-form-field color="accent" appearance="fill">
+    <mat-form-field color="primary" appearance="fill" id="dateInput">
       <mat-label>Expense date</mat-label>
       <input matInput [matDatepicker]="picker2" formControlName="ExpenseDate">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -24,7 +22,11 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button id="addExpenseButton" mat-raised-button color="primary" (click)="addNewExpense()">Add expense</button>
+    <mat-form-field color="primary" appearance="fill">
+      <mat-label>Cost</mat-label>
+      <input type="number" matInput formControlName="Cost">
+    </mat-form-field>
+    <button id="addExpenseButton" mat-raised-button color="primary" [disabled]="!userService.expenseToAddModel.valid" (click)="addNewExpense()">Add expense</button>
   </form>
 </div>
 

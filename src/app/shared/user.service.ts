@@ -33,7 +33,8 @@ export class UserService {
   expenseToAddModel = this.fb.group({
     Title: ['', Validators.required],
     ExpenseDate: ['', Validators.required],
-    Category: ['', Validators.required]
+    Category: ['', Validators.required],
+    Cost: ['', Validators.required]
   });
 
   comparePasswords(fb: FormGroup) {
@@ -88,7 +89,8 @@ export class UserService {
     var body = {
       Title: this.expenseToAddModel.value.Title,
       ExpenseDate: this.expenseToAddModel.value.ExpenseDate,
-      Category: this.expenseToAddModel.value.Category
+      Category: this.expenseToAddModel.value.Category,
+      Cost: this.expenseToAddModel.value.Cost
     };
     return this.http.post(this.baseApiUri + '/users/' + userName + '/expenses', body);
   }
