@@ -35,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-snack-bar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { DeletedSnackBarComponent } from './expenses/deleted-snack-bar/deleted-snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     CategoriesComponent,
     CreatedSnackBarComponent,
     NavbarComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    DeletedSnackBarComponent
   ],
   imports: [
     BrowserModule,

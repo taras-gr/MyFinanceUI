@@ -11,6 +11,7 @@ import { Expense } from '../models/expense';
 import { Category } from '../models/category'
 import { GetExpensesResultPaginationHeader } from '../models/getExpensesResultPaginationHeader';
 import { CategoryService } from '../shared/category.service';
+import { DeletedSnackBarComponent } from './deleted-snack-bar/deleted-snack-bar.component';
 
 @Component({
   selector: 'app-expenses',
@@ -90,14 +91,15 @@ export class ExpensesComponent implements AfterViewInit {
     );
   }
 
-  deleteExpense(expenseId: string) {
+  deleteExpense(expenseId: string, expenseTitle: string) {
     const userName = localStorage.getItem('userName');
     this.userService.deleteUserExpense(userName, expenseId).subscribe(
       () => {
         this.ngAfterViewInit();
-        // this.snackBar.openFromComponent(CreatedSnackBarComponent, {
-        //   duration: this.durationInSeconds * 1000,
-        // });
+        this.snackBar.openFromComponent(DeletedSnackBarComponent, {
+          duration: this.durationInSeconds * 1000,
+          data: { title: expenseTitle }
+        });
       },
       err => {
         // if (err.status == 400)
