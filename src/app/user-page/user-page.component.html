@@ -7,6 +7,18 @@
     <mat-list-item>{{ formModel.LastName }}</mat-list-item>
     <mat-divider></mat-divider>
     <mat-list-item>{{ formModel.Email }}</mat-list-item>
-  </mat-list>
-  <a [routerLink]="['', formModel.UserName, 'expenses']" style="float: right;">Expenses</a>
-  <a [routerLink]="['', formModel.UserName, 'categories']" style="float: right;">Categories</a>
+</mat-list>
+<div id="categoryAccordion">
+  <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Categories
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-categories></app-categories>
+      </mat-expansion-panel>
+  </mat-accordion>
+</div>

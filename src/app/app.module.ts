@@ -25,6 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,6 +37,8 @@ import { CreatedSnackBarComponent } from './expenses/created-snack-bar/created-s
 import { NavbarComponent } from './navbar/navbar.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { DeletedSnackBarComponent } from './expenses/deleted-snack-bar/deleted-snack-bar.component';
+import { CategoryCreatedSnackBarComponent } from './categories/category-created-snack-bar/category-created-snack-bar.component';
+import { CategoryDeletedSnackBarComponent } from './categories/category-deleted-snack-bar/category-deleted-snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { DeletedSnackBarComponent } from './expenses/deleted-snack-bar/deleted-s
     CreatedSnackBarComponent,
     NavbarComponent,
     StatisticsComponent,
-    DeletedSnackBarComponent
+    DeletedSnackBarComponent,
+    CategoryCreatedSnackBarComponent,
+    CategoryDeletedSnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { DeletedSnackBarComponent } from './expenses/deleted-snack-bar/deleted-s
     MatAutocompleteModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule
   ],
   exports: [ MatFormFieldModule, MatInputModule ],
   providers: [UserService, {
