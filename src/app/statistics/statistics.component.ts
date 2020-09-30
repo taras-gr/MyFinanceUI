@@ -18,11 +18,15 @@ export class StatisticsComponent implements OnInit {
   pieChartLabels = [];
   pieChartData = [];
   
-  constructor(public statisticsService: StatisticsService) { }
+  constructor(public statisticsService: StatisticsService) {
+    statisticsService.expenseDateRangeModel.value.StartDate = this.getFirstDayOfCurrentMonth();
+    statisticsService.expenseDateRangeModel.value.EndDate = new Date();
+  }
 
   ngOnInit(): void {
-    this.barChart = this.generateChart('barChart', 'bar', 'Expenses by date: ', this.barChartLabels, this.barChartData);
+    this.barChart = this.generateChart('barChart', 'bar', 'Expenses by date', this.barChartLabels, this.barChartData);
     this.pieChart = this.generateChart('pieChart', 'pie', 'Expenses by category', this.pieChartLabels, this.pieChartData);
+    this.getStats();
   }
 
   getStats() {
@@ -105,10 +109,6 @@ export class StatisticsComponent implements OnInit {
             backgroundColor: 
                 'rgba(63, 81, 181, 0.3)'
             ,
-            borderColor: [
-                //'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
         }]
     },
     options: {
@@ -127,4 +127,9 @@ export class StatisticsComponent implements OnInit {
     return chart;
   }
 
+  getFirstDayOfCurrentMonth() : Date {
+    var currentDate = new Date();
+    var dateToReturn = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    return dateToReturn;
+  }
 }

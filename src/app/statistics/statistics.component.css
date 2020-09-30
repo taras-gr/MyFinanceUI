@@ -3,3 +3,16 @@
     height: 500px;
     width: 800px;
 }
+
+#dateRangeInput {
+    margin: 20px 20px;
+}
+
+#datePicker {
+    margin-right: 10px;
+}
+
+#getStatsButton {
+    position: relative;
+    top: -6px;
+}

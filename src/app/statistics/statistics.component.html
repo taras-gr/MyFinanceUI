@@ -2,7 +2,7 @@
 <div id="statisticsWrapper">
     <div id="dateRangeInput">
       <form [formGroup]="statisticsService.expenseDateRangeModel">
-        <mat-form-field appearance="fill">
+        <mat-form-field id="datePicker" appearance="fill">
             <mat-label>Enter a date range</mat-label>
             <mat-date-range-input [rangePicker]="picker">
               <input matStartDate formControlName="StartDate" placeholder="Start date">
@@ -12,7 +12,7 @@
             <mat-date-range-picker #picker></mat-date-range-picker>
         
           </mat-form-field>
-          <button mat-raised-button color="primary" (click)="getStats()">Submit</button>   
+          <button id="getStatsButton" mat-raised-button color="primary" (click)="getStats()">Submit</button>   
       </form>     
     </div>
     <div id="datesStats" class="charts">
