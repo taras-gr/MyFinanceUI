@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-created-snack-bar',
-  templateUrl: './created-snack-bar.component.html',
-  styleUrls: ['./created-snack-bar.component.css']
+  templateUrl: './created-snack-bar.component.html'
 })
 export class CreatedSnackBarComponent implements OnInit {
 
