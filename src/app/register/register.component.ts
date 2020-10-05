@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     this.service.register().subscribe(
       (res: any) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('userName', res.userName);
         console.log(res.token);
         this.router.navigateByUrl('/userpage');
       },

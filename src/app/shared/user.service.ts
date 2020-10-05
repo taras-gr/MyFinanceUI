@@ -18,6 +18,7 @@ export class UserService {
   userForRegistrationModel = this.fb.group({
     FirstName: ['', Validators.required],
     LastName: ['', Validators.required],
+    UserName: ['', Validators.required],
     Email: ['', Validators.email],
     Passwords: this.fb.group({
       Password: ['', [Validators.required, Validators.minLength(4)]],
@@ -53,6 +54,7 @@ export class UserService {
     var body = {
       FirstName: this.userForRegistrationModel.value.FirstName,
       LastName: this.userForRegistrationModel.value.LastName,
+      UserName: this.userForRegistrationModel.value.UserName,
       Email: this.userForRegistrationModel.value.Email,
       Password: this.userForRegistrationModel.value.Passwords.Password
     };
