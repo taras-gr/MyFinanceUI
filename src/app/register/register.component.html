@@ -12,6 +12,11 @@
       </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="UserName" required>
+    </mat-form-field>
+  <br>
+    <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput formControlName="Email" required>
       </mat-form-field>
@@ -19,12 +24,12 @@
     <div formGroupName="Passwords">
       <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
-          <input matInput formControlName="Password" required>
+          <input matInput formControlName="Password" type="password" required>
         </mat-form-field>
       <br>
       <mat-form-field appearance="fill">
           <mat-label>Confirm password</mat-label>
-          <input matInput formControlName="ConfirmPassword" required>
+          <input matInput formControlName="ConfirmPassword" type="password" required>
       </mat-form-field>
     </div>
     <br>
