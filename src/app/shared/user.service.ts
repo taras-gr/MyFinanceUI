@@ -56,7 +56,7 @@ export class UserService {
       Email: this.userForRegistrationModel.value.Email,
       Password: this.userForRegistrationModel.value.Passwords.Password
     };
-    return this.http.post(this.baseApiUri + '/User/Register', body);
+    return this.http.post(this.baseApiUri + '/auth/Register', body);
   }
 
   login() {
@@ -64,7 +64,7 @@ export class UserService {
       Email: this.userForLoginModel.value.Email,
       Password: this.userForLoginModel.value.Password
     };
-    return this.http.post(this.baseApiUri + '/User/Login', body);
+    return this.http.post(this.baseApiUri + '/auth/Login', body);
   }
 
   userProfile() {
