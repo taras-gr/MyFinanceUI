@@ -62,7 +62,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
           ExpenseDate
         </th>
-        <td mat-cell *matCellDef="let row">{{row.expenseDate}}</td>
+        <td mat-cell *matCellDef="let row">{{ row.expenseDate | date }}</td>
       </ng-container>
 
       <!-- Cost Column -->
