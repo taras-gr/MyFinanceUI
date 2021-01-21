@@ -66,3 +66,24 @@ table {
   position: relative;
   top: -6px;
 }
+
+.editField {
+  margin-bottom: -20px !important;
+}
+
+td {
+  width: 180px !important; 
+}
+
+
+mat-cell{
+  display:flex !important;
+  justify-content:center!important;
+  
+}
+
+mat-header-cell {
+  display:flex;
+  justify-content:center;
+}
+

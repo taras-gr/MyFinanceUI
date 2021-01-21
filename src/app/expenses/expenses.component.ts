@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { UserService } from '../shared/user.service';
+import { ExpenseService } from '../shared/expense.service';
 import { CreatedSnackBarComponent } from './created-snack-bar/created-snack-bar.component';
 import { Expense } from '../models/expense';
 import { Category } from '../models/category'
@@ -21,6 +22,7 @@ import { DeletedSnackBarComponent } from './deleted-snack-bar/deleted-snack-bar.
 export class ExpensesComponent implements AfterViewInit {
   displayedColumns: string[] = ['title', 'category', 'expenseDate', 'cost', 'actions'];
   data: Expense[] = [];
+  userName = localStorage.getItem('userName');
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -32,10 +34,10 @@ export class ExpensesComponent implements AfterViewInit {
   value;
   categories: Category[];
   
-  constructor(
-    private snackBar: MatSnackBar, 
+  constructor(private snackBar: MatSnackBar, 
     private categoryService: CategoryService, 
-    public userService: UserService) { }
+    public userService: UserService,
+    public expenseService: ExpenseService) { }
 
   ngAfterViewInit(): void {
     const userName = localStorage.getItem('userName');    
@@ -53,7 +55,7 @@ export class ExpensesComponent implements AfterViewInit {
         switchMap(() => {
           this.isLoadingResults = true;
           var results : Observable<HttpResponse<Expense[]>>;
-          results = this.userService
+          results = this.expenseService
             .getUserExpenses(userName, this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
             results.subscribe((res: any) => {
               let paginationHeaderValue: GetExpensesResultPaginationHeader;
@@ -75,7 +77,7 @@ export class ExpensesComponent implements AfterViewInit {
   
   addNewExpense() {
     const userName = localStorage.getItem('userName');
-    this.userService.postNewExpense(userName).subscribe(
+    this.expenseService.postNewExpense(userName).subscribe(
       () => {
         this.ngAfterViewInit();
         this.snackBar.openFromComponent(CreatedSnackBarComponent, {
@@ -93,13 +95,27 @@ export class ExpensesComponent implements AfterViewInit {
 
   deleteExpense(expenseId: string, expenseTitle: string) {
     const userName = localStorage.getItem('userName');
-    this.userService.deleteUserExpense(userName, expenseId).subscribe(
+    this.expenseService.deleteUserExpense(userName, expenseId).subscribe(
       () => {
         this.ngAfterViewInit();
         this.snackBar.openFromComponent(DeletedSnackBarComponent, {
           duration: this.durationInSeconds * 1000,
           data: { title: expenseTitle }
         });
+      },
+      err => {
+        // if (err.status == 400)
+        //   //this.toastr.error('Incorrect username or password.', 'Authentication failed.');
+        // else
+        //   console.log(err);
+      }
+    );
+  }
+
+  updateExpense(row: any) {    
+    const userName = localStorage.getItem('userName');
+    this.expenseService.updateUserExpenseById(userName, row).subscribe(
+      () => {
       },
       err => {
         // if (err.status == 400)
