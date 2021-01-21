@@ -113,16 +113,20 @@ export class StatisticsComponent implements OnInit {
     },
     options: {
         maintainAspectRatio: false,
-        // scales: {
-        //     yAxes: [{
-        //         ticks: {
-        //             beginAtZero: true
-        //         }
-        //     }]
-        // }
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
     }
     }
     );    
+
+    // TODO: ГАЛІМИЙ КОСТИЛЬ. ВИПРАВИТИ !!!!
+    if (chartType == "pie")
+      chart.options.scales = null;
 
     return chart;
   }
