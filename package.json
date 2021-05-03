@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~10.0.5",
     "@angular/platform-browser-dynamic": "~10.0.5",
     "@angular/router": "~10.0.5",
+    "aws-amplify": "^3.0.23",
     "chart.js": "^2.9.3",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

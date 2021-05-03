@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
+import { Auth } from 'aws-amplify';
 
 @Injectable({
   providedIn: 'root'
@@ -59,12 +60,22 @@ export class UserService {
     return this.http.post(this.baseApiUri + '/auth/Register', body);
   }
 
-  login() {
-    var body = {
-      Email: this.userForLoginModel.value.Email,
-      Password: this.userForLoginModel.value.Password
-    };
-    return this.http.post(this.baseApiUri + '/auth/Login', body);
+  async login() {
+    var user = await Auth.signIn(this.userForLoginModel.value.Email, 
+    this.userForLoginModel.value.Password);
+
+    var tokens = user.signInUserSession;
+
+    user.getUserData(function(err, result) {
+        if (err) {
+          alert(err.message || JSON.stringify(err));
+          return;
+        }
+        localStorage.setItem('userName', result.Username);
+    });
+
+    localStorage.setItem('token', tokens.idToken.jwtToken);
+    return tokens.idToken.jwtToken;
   }
 
   userProfile() {
