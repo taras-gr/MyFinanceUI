@@ -42,16 +42,16 @@ import { CategoryDeletedSnackBarComponent } from './categories/category-deleted-
 import Amplify from 'aws-amplify';
 import { environment } from 'src/environments/environment';
 
-Amplify.configure({
-  Auth:{
-    mandatorySignIn: environment.AWSCognito.mandatorySignIn,
-    region: environment.AWSCognito.region,
-    userPoolId: environment.AWSCognito.userPoolId,
-    userPoolWebClientId: environment.AWSCognito.userPoolWebClientId,
-    authenticationFlowType: environment.AWSCognito.authenticationFlowType
-  }
+// Amplify.configure({
+//   Auth:{
+//     mandatorySignIn: environment.AWSCognito.mandatorySignIn,
+//     region: environment.AWSCognito.region,
+//     userPoolId: environment.AWSCognito.userPoolId,
+//     userPoolWebClientId: environment.AWSCognito.userPoolWebClientId,
+//     authenticationFlowType: environment.AWSCognito.authenticationFlowType
+//   }
 
-});
+// });
 
 @NgModule({
   declarations: [

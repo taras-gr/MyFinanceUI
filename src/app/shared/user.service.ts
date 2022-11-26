@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { environment } from 'src/environments/environment';
 import { Auth } from 'aws-amplify';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -61,24 +62,59 @@ export class UserService {
   }
 
   async login() {
-    var user = await Auth.signIn(this.userForLoginModel.value.Email, 
-    this.userForLoginModel.value.Password);
+    let body = new URLSearchParams();
+    body.set('client_id', environment.AzureADB2C.clientId);
+    body.set('grant_type', environment.AzureADB2C.grantType);
+    body.set('scope', environment.AzureADB2C.scope);
+    body.set('username', this.userForLoginModel.value.Email);
+    body.set('password', this.userForLoginModel.value.Password);
 
-    var tokens = user.signInUserSession;
+    let options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
 
-    user.getUserData(function(err, result) {
-        if (err) {
-          alert(err.message || JSON.stringify(err));
-          return;
-        }
-        localStorage.setItem('userName', result.Username);
-    });
+    var authResult = this.http
+      .post("https://myfinanceapi.b2clogin.com/myfinanceapi.onmicrosoft.com/B2C_1_ROPC_Auth/oauth2/v2.0/token", body.toString(), options)
+      .subscribe((res: any) => {
+        console.log(res);
+        const tokenInfo = this.getDecodedAccessToken(res.access_token);
+        localStorage.setItem('userName', tokenInfo.name);
+        localStorage.setItem('token', res.access_token);
+      });
 
-    localStorage.setItem('token', tokens.idToken.jwtToken);
-    return tokens.idToken.jwtToken;
+    // this.http
+    // .post('//yourUrl.com/login', body.toString(), options)
+    // .subscribe(response => {
+    //     //...
+    // });
+
+    // //var user = await Auth.signIn(this.userForLoginModel.value.Email, 
+    // //this.userForLoginModel.value.Password);
+
+    // var tokens = user.signInUserSession;
+
+    // user.getUserData(function(err, result) {
+    //     if (err) {
+    //       alert(err.message || JSON.stringify(err));
+    //       return;
+    //     }
+    //     localStorage.setItem('userName', result.Username);
+    // });
+
+    // localStorage.setItem('token', tokens.idToken.jwtToken);
+    // return tokens.idToken.jwtToken;
   }
 
   userProfile() {
     return this.http.get(this.baseApiUri + '/UserProfile');
   }
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      return jwt_decode(token);
+    } catch(Error) {
+      return null;
+    }
+  }
+  
 }

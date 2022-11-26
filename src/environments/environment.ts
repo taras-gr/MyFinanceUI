@@ -8,5 +8,10 @@ export const environment = {
     userPoolId: '<userPoolId>',
     userPoolWebClientId: '<userPoolWebClientId>',
     authenticationFlowType:'<authenticationFlowType>'
+  },
+  AzureADB2C : {
+    clientId: '<clientId>',
+    scope: '<scope>',
+    grantType: '<grantType>'
   }
 };
